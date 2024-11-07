@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <link href="styles.css" rel="stylesheet" title="Estilos padrão">
+    <link rel="icon" type="image/png" href="img/icon.png">    <!-- define o icon da guia do navegador -->
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>CALCULE SEU ÍNDICE DE MASSA CORPORAL</h1>
+            
+            <label for="age-group">Selecione a faixa etária:</label>
+            <select id="age-group">
+                <option value="child">Criança (0 à 18 anos)</option>
+                <option value="adult" selected>Adulto (18 à 55 anos)</option>
+                <option value="elderly">Idoso (55 anos ou mais)</option>
+            </select>
+
+            <label for="weight">Peso (kg):</label>
+            <input type="text" id="weight" placeholder="Digite seu peso" maxlength="5">
+
+            <label for="height">Altura (cm):</label>
+            <input type="text" id="height" placeholder="Digite sua altura em centímetros. Ex: 1.77m = 177cm" maxlength="5">
+            
+            <button onclick="calculateBMI()">Calcular IMC</button>
+            
+            <div id="result" class="result">
+                <div class="bmi-value"></div>
+                <div class="classification"></div>
+            </div>
+        </div>
+        <div class="table-container">
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faixas de IMC</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Faixa</th>
+                        <th>Classificação (Adultos)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Abaixo de 18,5</td>
+                        <td>Abaixo do peso</td>
+                    </tr>
+                    <tr>
+                        <td>18,5 - 24,9</td>
+                        <td>Peso normal</td>
+                    </tr>
+                    <tr>
+                        <td>25 - 29,9</td>
+                        <td>Sobrepeso</td>
+                    </tr>
+                    <tr>
+                        <td>30 ou mais</td>
+                        <td>Obesidade</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        function calculateBMI() {
+            const weightInput = document.getElementById('weight').value;
+            const heightInput = document.getElementById('height').value;
+            const ageGroup = document.getElementById('age-group').value;
+
+            const weight = parseFloat(weightInput);
+            const height_cm = parseFloat(heightInput);
+
+            if (isNaN(weight) || weight <= 0) {
+                document.getElementById('result').innerHTML = '<span style="color: red;">Peso inválido. Deve ser um valor positivo.</span>';
+                return;
+            }
+
+            if (isNaN(height_cm) || height_cm <= 0) {
+                document.getElementById('result').innerHTML = '<span style="color: red;">Altura inválida. Deve ser um valor positivo.</span>';
+                return;
+            }
+
+            const height_m = height_cm / 100;
+            const bmi = weight / (height_m ** 2);
+            const roundedBMI = bmi.toFixed(1);
+
+            let classification = '';
+            let classStyle = '';
+
+            if (ageGroup === 'child') {
+                // Faixas de IMC para crianças (exemplos)
+                if (bmi < 14) {
+                    classification = 'Abaixo do peso';
+                    classStyle = 'underweight';
+                } else if (bmi < 18) {
+                    classification = 'Peso normal';
+                    classStyle = 'normal';
+                } else if (bmi < 22) {
+                    classification = 'Sobrepeso';
+                    classStyle = 'overweight';
+                } else {
+                    classification = 'Obesidade';
+                    classStyle = 'obesity';
+                }
+            } else if (ageGroup === 'elderly') {
+                // Faixas de IMC para idosos (exemplos)
+                if (bmi < 22) {
+                    classification = 'Abaixo do peso';
+                    classStyle = 'underweight';
+                } else if (bmi < 27) {
+                    classification = 'Peso normal';
+                    classStyle = 'normal';
+                } else if (bmi < 30) {
+                    classification = 'Sobrepeso';
+                    classStyle = 'overweight';
+                } else {
+                    classification = 'Obesidade';
+                    classStyle = 'obesity';
+                }
+            } else {
+                // Faixas de IMC para adultos
+                if (bmi < 18.5) {
+                    classification = 'Abaixo do peso';
+                    classStyle = 'underweight';
+                } else if (bmi < 24.9) {
+                    classification = 'Peso normal';
+                    classStyle = 'normal';
+                } else if (bmi < 29.9) {
+                    classification = 'Sobrepeso';
+                    classStyle = 'overweight';
+                } else {
+                    classification = 'Obesidade';
+                    classStyle = 'obesity';
+                }
+            }
+
+            document.getElementById('result').innerHTML = `
+                <div class="bmi-value">Seu IMC é ${roundedBMI}</div>
+                <div class="classification ${classStyle}">${classification}</div>
+            `;
+        }
+    </script>
+</body>
+</html>

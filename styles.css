@@ -1,0 +1,133 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0056b3, #0099ff);
+    background-size: 400% 400%;
+    animation: backgroundAnimation 5s ease infinite;
+    background-image: url('Novo Projeto.png'); /* Substitua pelo caminho da sua imagem */
+    background-position: left center; /* Posiciona a imagem ao lado esquerdo */
+    background-repeat: no-repeat; /* Evita a repetição da imagem */
+    background-size: contain; /* Ajusta o tamanho da imagem para caber na tela */
+}
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+.form-container, .table-container {
+    flex: 1;
+}
+h1 {
+    font-size: 34px;
+    margin-bottom: 20px;
+    color: #0056b3; /* Azul escuro */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+    color: #0056b3; /* Azul escuro */
+}
+input, select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #0056b3; /* Azul escuro */
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+}
+button {
+    padding: 12px 20px;
+    background-color: #0056b3; /* Azul escuro para o botão */
+    color: white; /* Cor da fonte do botão */
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+button:hover {
+    background-color: #00408c; /* Azul mais escuro ao passar o mouse */
+    transform: scale(1.05);
+}
+button:active {
+    background-color: #003366; /* Azul ainda mais escuro ao clicar */
+    transform: scale(0.98);
+}
+.result {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+.result .bmi-value {
+    font-size: 22px;
+}
+.result .classification {
+    font-size: 20px;
+    font-weight: bold;
+}
+.underweight {
+    color: red;
+}
+.normal {
+    color: green;
+}
+.overweight {
+    color: orange;
+}
+.obesity {
+    color: red;
+}
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    margin-top: 55px;
+    text-align: center;
+    justify-content: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 2px solid #0056b3; /* Azul escuro */
+}
+th, td {
+    padding: 15px;
+    text-align: center;
+}
+th {
+    background-color: #0056b3; /* Azul escuro */
+    color: white;
+}
+td {
+    background-color: #f9f9f9;
+    color: #333;
+}
